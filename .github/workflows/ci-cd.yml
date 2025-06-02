@@ -1,0 +1,115 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test and Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build application
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: dist/
+
+  deploy:
+    name: Deploy to Production
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+          path: dist/
+
+      - name: Deploy application
+        run: npm run deploy
+
+      - name: Deploy to GitHub Pages (Optional)
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+
+  notify:
+    name: Send Notifications
+    needs: [test, deploy]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Slack Notification on Success
+        if: ${{ needs.test.result == 'success' && needs.deploy.result == 'success' }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: "✅ CI/CD Pipeline completed successfully! Build and deployment were successful."
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Slack Notification on Failure
+        if: ${{ needs.test.result == 'failure' || needs.deploy.result == 'failure' }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: "❌ CI/CD Pipeline failed! Please check the logs for details."
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Email Notification on Failure
+        if: ${{ needs.test.result == 'failure' || needs.deploy.result == 'failure' }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "CI/CD Pipeline Failed"
+          body: |
+            The CI/CD pipeline has failed for the latest commit.
+
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref }}
+            Commit: ${{ github.sha }}
+
+            Please check the GitHub Actions logs for more details.
+          to: ${{ secrets.EMAIL_TO }}
+          from: ${{ secrets.EMAIL_FROM }}

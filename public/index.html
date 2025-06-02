@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript CI/CD Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .success {
+            background: #4CAF50;
+            color: white;
+        }
+        .info {
+            background: #2196F3;
+            color: white;
+        }
+        .pipeline-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .pipeline-step {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+        .arrow {
+            font-size: 24px;
+            color: #FFD700;
+        }
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .demo-section {
+            margin-top: 30px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 TypeScript CI/CD Demo</h1>
+        <p>Continuous Integration & Continuous Delivery Pipeline</p>
+        <div class="status success">✅ Deployed Successfully</div>
+        <div class="status info">🔄 Pipeline Active</div>
+    </div>
+
+    <div class="card">
+        <h2>📊 Pipeline Overview</h2>
+        <div class="pipeline-flow">
+            <div class="pipeline-step">
+                <h4>📝 Code Push</h4>
+                <p>Git Repository</p>
+            </div>
+            <div class="arrow">→</div>
+            <div class="pipeline-step">
+                <h4>🔨 Build & Test</h4>
+                <p>GitHub Actions</p>
+            </div>
+            <div class="arrow">→</div>
+            <div class="pipeline-step">
+                <h4>🚢 Deploy</h4>
+                <p>GitHub Pages</p>
+            </div>
+            <div class="arrow">→</div>
+            <div class="pipeline-step">
+                <h4>📧 Notify</h4>
+                <p>Slack/Email</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>💻 Application Output</h2>
+        <p>The TypeScript application generates the following output:</p>
+        <pre id="app-output">Loading application output...</pre>
+    </div>
+
+    <div class="card demo-section">
+        <h2>🎯 Demo Features</h2>
+        <ul>
+            <li><strong>Version Control:</strong> Git with GitHub repository</li>
+            <li><strong>Language:</strong> TypeScript with automated compilation</li>
+            <li><strong>Testing:</strong> Jest framework with automated test execution</li>
+            <li><strong>CI/CD:</strong> GitHub Actions pipeline</li>
+            <li><strong>Deployment:</strong> Automated deployment to GitHub Pages</li>
+            <li><strong>Notifications:</strong> Slack and Email integration</li>
+            <li><strong>Personal Account:</strong> Individual developer setup</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🔧 Quick Commands</h2>
+        <pre>
+# Local Development
+npm install          # Install dependencies
+npm run dev         # Run in development mode
+npm test           # Run automated tests
+npm run build      # Build for production
+
+# CI/CD Pipeline
+git push origin main    # Trigger deployment
+git push origin develop # Trigger tests only
+        </pre>
+    </div>
+
+    <div class="footer">
+        <p><strong>Personal CI/CD Demo</strong> | Built with TypeScript & GitHub Actions</p>
+        <p>🌟 Successfully demonstrating automated build, test, and deployment workflow</p>
+        <p id="build-time"></p>
+    </div>
+
+    <script>
+        // Simulate the TypeScript application output
+        document.addEventListener('DOMContentLoaded', function() {
+            const output = `Hello World from TypeScript CI/CD Demo!
+Version: 1.0.0
+🚀 CI/CD Pipeline Demo - Running successfully!
+
+Build Information:
+- Environment: Production
+- Deployment: GitHub Pages
+- Build Date: ${new Date().toLocaleString()}
+- Status: ✅ Successfully Deployed`;
+            
+            document.getElementById('app-output').textContent = output;
+            document.getElementById('build-time').textContent = `Last deployed: ${new Date().toLocaleString()}`;
+        });
+    </script>
+</body>
+</html> 
