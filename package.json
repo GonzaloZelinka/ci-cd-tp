@@ -7,10 +7,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "jest",
-    "test:watch": "jest --watch",
     "dev": "ts-node src/index.ts",
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
+    "prebuild": "rm -rf dist",
     "postbuild": "mkdir -p dist && cp public/index.html dist/",
     "deploy": "echo 'Deploying to production...' && npm run build && echo 'Deployment complete!'",
     "setup": "chmod +x scripts/setup.sh && ./scripts/setup.sh"
