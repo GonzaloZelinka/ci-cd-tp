@@ -11,16 +11,21 @@ Complete CI/CD implementation with TypeScript, GitHub Actions, and automated tes
 
 ## 🎯 Quick Start
 
-### 1. Clone and Test
+### 1. Clone and Setup
 
 ```bash
 git clone <repository-url>
 cd <repository-name>
-npm install
-npm test
-npm run build
-npm start
+npm run setup
 ```
+
+**The setup script will automatically:**
+
+- ✅ Check Node.js version
+- ✅ Install dependencies
+- ✅ Run tests
+- ✅ Build the project
+- ✅ Prepare deployment files
 
 **Expected output:**
 
@@ -75,7 +80,7 @@ git add . && git commit -m "fix: restore test" && git push
 ├── __tests__/index.test.ts   # Tests
 ├── .github/workflows/        # CI/CD pipeline
 ├── public/index.html         # Deployment page
-└── docs/                     # Documentation
+└── scripts/setup.sh          # Automated setup script
 ```
 
 ## 🔄 CI/CD Pipeline
@@ -104,18 +109,10 @@ After this setup, pushes to `main` branch will automatically deploy to: `https:/
 
 ## 📊 Commands
 
-| Command         | Description      |
-| --------------- | ---------------- |
-| `npm test`      | Run tests        |
-| `npm run build` | Build project    |
-| `npm start`     | Run application  |
-| `npm run dev`   | Development mode |
-
-## 🆘 Troubleshooting
-
-- **Tests fail**: `npm install && npm test`
-- **Build fails**: `npm run clean && npm run build`
-- **No notifications**: Check `SLACK_WEBHOOK_URL` secret is configured
-- **Deployment issues**: Verify GitHub Pages is enabled
-
----
+| Command         | Description                    |
+| --------------- | ------------------------------ |
+| `npm run setup` | **Run automated setup script** |
+| `npm test`      | Run tests                      |
+| `npm run build` | Build project                  |
+| `npm start`     | Run application                |
+| `npm run dev`   | Development mode               |

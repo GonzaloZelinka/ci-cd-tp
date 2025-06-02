@@ -58,17 +58,3 @@ mkdir -p dist
 cp public/index.html dist/
 
 echo "🎉 Setup completed successfully!"
-echo ""
-echo "Next steps:"
-echo "1. Initialize Git repository: git init"
-echo "2. Add your code: git add ."
-echo "3. Create initial commit: git commit -m 'Initial CI/CD setup'"
-echo "4. Add remote repository: git remote add origin <your-repo-url>"
-echo "5. Push to GitHub: git push -u origin main"
-echo ""
-echo "Local development commands:"
-echo "- npm run dev    # Run in development mode"
-echo "- npm test       # Run tests"
-echo "- npm run build  # Build for production"
-echo ""
-echo "Happy coding! 🎯" 
