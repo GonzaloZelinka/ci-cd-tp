@@ -91,6 +91,17 @@ git add . && git commit -m "fix: restore test" && git push
 
 You can follow this [youtube video](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to setup slack notifications.
 
+## 🚀 Enable GitHub Pages
+
+**Important**: You need to enable GitHub Pages for deployment to work:
+
+1. Go to your repository on GitHub
+2. Click **Settings** → **Pages**
+3. Under **Source**, select **GitHub Actions**
+4. Save the settings
+
+After this setup, pushes to `main` branch will automatically deploy to: `https://<your-username>.github.io/<your-repo>/`
+
 ## 📊 Commands
 
 | Command         | Description      |
