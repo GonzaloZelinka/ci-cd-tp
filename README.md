@@ -89,6 +89,8 @@ git add . && git commit -m "fix: restore test" && git push
 2. **Add to GitHub**: Your repo → Settings → Secrets → New secret: `SLACK_WEBHOOK_URL`
 3. **Test**: Push any change and check Slack for notifications
 
+You can follow this [youtube video](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to setup slack notifications.
+
 ## 📊 Commands
 
 | Command         | Description      |
