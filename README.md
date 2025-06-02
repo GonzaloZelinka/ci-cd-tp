@@ -71,7 +71,6 @@ git add . && git commit -m "fix: restore test" && git push
 - ✅ **GitHub Actions** CI/CD pipeline
 - ✅ **GitHub Pages** deployment
 - ✅ **Slack** notifications
-- ✅ **Docker** support (optional)
 
 ## 📁 Project Structure
 
@@ -85,7 +84,7 @@ git add . && git commit -m "fix: restore test" && git push
 
 ## 🔄 CI/CD Pipeline
 
-**Triggers**: Push to `main` or `develop` branches
+**Triggers**: Push to `main` branch or Pull Request to `main`
 **Steps**: Install → Test → Build → Deploy → Notify
 
 ## 📧 Setup Slack Notifications
