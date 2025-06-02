@@ -47,7 +47,7 @@ sed -i.bak 's/Hello World from TypeScript CI\/CD Demo!/This will fail!/' __tests
 git add . && git commit -m "test: intentional failure" && git push
 ```
 
-**Result**: ❌ Pipeline fails, notifications sent
+**Result**: ❌ Pipeline fails, Slack notification sent
 
 ### Fix the Failure
 
@@ -65,7 +65,7 @@ git add . && git commit -m "fix: restore test" && git push
 - ✅ **Jest** automated tests
 - ✅ **GitHub Actions** CI/CD pipeline
 - ✅ **GitHub Pages** deployment
-- ✅ **Slack/Email** notifications
+- ✅ **Slack** notifications
 - ✅ **Docker** support (optional)
 
 ## 📁 Project Structure
@@ -83,12 +83,11 @@ git add . && git commit -m "fix: restore test" && git push
 **Triggers**: Push to `main` or `develop` branches
 **Steps**: Install → Test → Build → Deploy → Notify
 
-## 📧 Setup Notifications
+## 📧 Setup Slack Notifications
 
-**Slack**: Add `SLACK_WEBHOOK_URL` secret to your GitHub repo
-**Email**: Add `EMAIL_USERNAME`, `EMAIL_PASSWORD`, `EMAIL_TO`, `EMAIL_FROM` secrets
-
-📝 **Detailed guide**: `docs/NOTIFICATION_SETUP.md`
+1. **Get webhook URL**: Slack → Apps → Incoming WebHooks → Add to Slack
+2. **Add to GitHub**: Your repo → Settings → Secrets → New secret: `SLACK_WEBHOOK_URL`
+3. **Test**: Push any change and check Slack for notifications
 
 ## 📊 Commands
 
@@ -103,7 +102,7 @@ git add . && git commit -m "fix: restore test" && git push
 
 - **Tests fail**: `npm install && npm test`
 - **Build fails**: `npm run clean && npm run build`
-- **No notifications**: Check GitHub secrets are configured
+- **No notifications**: Check `SLACK_WEBHOOK_URL` secret is configured
 - **Deployment issues**: Verify GitHub Pages is enabled
 
 ---
