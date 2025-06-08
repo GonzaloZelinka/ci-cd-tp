@@ -1,13 +1,54 @@
-# 🚀 TypeScript CI/CD Demo Project
+# 🚀 Dynamic Personal Dashboard
 
-Complete CI/CD implementation with TypeScript, GitHub Actions, and automated testing.
+A live, interactive dashboard with real-time updates deployed via CI/CD to GitHub Pages.
+
+## ✨ Dynamic Features
+
+- 🕒 **Live Clock** - Updates every second with current time
+- 💭 **Daily Quote** - Changes daily with inspirational quotes
+- 👥 **Visitor Counter** - Tracks visits using localStorage
+- 📊 **Real GitHub API** - Live repository stats from GitHub API
+- 👤 **GitHub Profile** - User statistics and repository data
+- ⚡ **System Status** - Live pipeline and deployment info
+- 🎲 **Random Facts** - Interactive tech facts with refresh button
+
+## 🚀 Real GitHub API Integration
+
+The dashboard fetches **live data** from GitHub's public API:
+
+- ⭐ **Repository stars, forks, watchers**
+- 🐛 **Open issues count**
+- 📅 **Last update timestamp**
+- 👤 **User profile statistics**
+- 📁 **Public repository count**
+
+**Shows:** `GonzaloZelinka/ci-cd-tp` repository
+**Features:** Real-time data, automatic updates, error handling
+
+## 📁 Clean File Structure
+
+```
+├── public/
+│   ├── index.html           # Main HTML structure
+│   ├── styles.css          # All CSS styling
+│   └── dashboard.js        # JavaScript functionality
+├── src/index.ts            # TypeScript backend logic
+├── __tests__/index.test.ts # Automated tests
+└── dist/                   # Built files for deployment
+```
+
+**Benefits:**
+
+- ✅ **Separated concerns** - HTML, CSS, JS in separate files
+- ✅ **Easy maintenance** - Find and edit specific functionality
+- ✅ **GitHub Pages ready** - All static files properly served
+- ✅ **Simple deployment** - No containers, just static files
 
 ## ✅ Prerequisites
 
 - Node.js 18+
 - Git configured with your personal account
 - GitHub account
-- Access to this repository
 
 ## 🎯 Quick Start
 
@@ -27,84 +68,42 @@ npm run setup
 - ✅ Build the project
 - ✅ Prepare deployment files
 
-**Expected output:**
+### 2. Run Locally
 
-```
-Hello World from TypeScript CI/CD Demo!
-Version: 1.0.0
-🚀 CI/CD Pipeline Demo - Running successfully!
+```bash
+npm run dev         # Development mode
+npm run build       # Build for production
+npm test           # Run tests
 ```
 
-### 2. Create Your Own Repository
+### 3. Deploy to GitHub Pages
 
 1. Fork this repository OR create a new GitHub repository
 2. Push your code to your repository
 3. Go to **Actions** tab to see the CI/CD pipeline running
 4. After success, visit: `https://<your-username>.github.io/<your-repo>/`
 
-## 🧪 Demo the Pipeline
-
-### Trigger a Failure
-
-```bash
-# Edit test to fail
-sed -i.bak 's/Hello World from TypeScript CI\/CD Demo!/This will fail!/' __tests__/index.test.ts
-git add . && git commit -m "test: intentional failure" && git push
-```
-
-**Result**: ❌ Pipeline fails, Slack notification sent
-
-### Fix the Failure
-
-```bash
-# Restore correct test
-mv __tests__/index.test.ts.bak __tests__/index.test.ts
-git add . && git commit -m "fix: restore test" && git push
-```
-
-**Result**: ✅ Pipeline passes, deploys to GitHub Pages
-
 ## 🏗️ What's Included
 
-- ✅ **TypeScript** application with "Hello World"
-- ✅ **Jest** automated tests
+- ✅ **TypeScript** application with dynamic features
+- ✅ **Jest** automated testing
 - ✅ **GitHub Actions** CI/CD pipeline
 - ✅ **GitHub Pages** deployment
+- ✅ **Real GitHub API** integration
+- ✅ **Real-time updates** with JavaScript
+- ✅ **Responsive design** with CSS Grid
 - ✅ **Slack** notifications
-
-## 📁 Project Structure
-
-```
-├── src/index.ts              # Main application
-├── __tests__/index.test.ts   # Tests
-├── .github/workflows/        # CI/CD pipeline
-├── public/index.html         # Deployment page
-└── scripts/setup.sh          # Automated setup script
-```
 
 ## 🔄 CI/CD Pipeline
 
 **Triggers**: Push to `main` branch or Pull Request to `main`
 **Steps**: Install → Test → Build → Deploy → Notify
 
-## 📧 Setup Slack Notifications
+The dashboard automatically updates with:
 
-1. **Get webhook URL**: Slack → Apps → Incoming WebHooks → Add to Slack
-2. **Add to GitHub**: Your repo → Settings → Secrets → New secret: `SLACK_WEBHOOK_URL`
-3. **Test**: Push any change and check Slack for notifications
-
-You can follow this [youtube video](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to setup slack notifications.
-
-## 🚀 Enable GitHub Pages
-
-**Important**: You need to enable GitHub Pages for deployment to work:
-
-1. Go to your repository on GitHub
-2. Click **Settings** → **Pages**
-3. Under **Source**, select **GitHub Actions**
-4. Save the settings
-
-After this setup, pushes to `main` branch will automatically deploy to: `https://<your-username>.github.io/<your-repo>/`
+- ⏰ Current deployment timestamp
+- 📈 Live system status
+- 🔄 Real-time clock updates
 
 ## 📊 Commands
 

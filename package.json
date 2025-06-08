@@ -1,7 +1,7 @@
 {
-  "name": "typescript-ci-cd-demo",
-  "version": "1.0.0",
-  "description": "A basic CI/CD demo project with TypeScript",
+  "name": "dynamic-personal-dashboard",
+  "version": "2.0.0",
+  "description": "A dynamic personal dashboard with live data updates for GitHub Pages",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -9,14 +9,16 @@
     "test": "jest",
     "dev": "ts-node src/index.ts",
     "prebuild": "rm -rf dist",
-    "postbuild": "mkdir -p dist && cp public/index.html dist/",
+    "postbuild": "mkdir -p dist && cp -r public/* dist/",
     "deploy": "echo 'Deploying to production...' && npm run build && echo 'Deployment complete!'",
     "setup": "chmod +x scripts/setup.sh && ./scripts/setup.sh"
   },
   "keywords": [
     "typescript",
     "ci-cd",
-    "demo"
+    "dashboard",
+    "dynamic",
+    "github-pages"
   ],
   "author": "Personal Account Demo",
   "license": "MIT",

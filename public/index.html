@@ -3,177 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeScript CI/CD Demo</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
-        }
-        .header {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .status {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin: 5px;
-        }
-        .success {
-            background: #4CAF50;
-            color: white;
-        }
-        .info {
-            background: #2196F3;
-            color: white;
-        }
-        .pipeline-flow {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .pipeline-step {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            flex: 1;
-            min-width: 120px;
-        }
-        .arrow {
-            font-size: 24px;
-            color: #FFD700;
-        }
-        pre {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-        }
-        .demo-section {
-            margin-top: 30px;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-        }
-    </style>
+    <title>Dynamic Personal Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="header">
-        <h1>🚀 TypeScript CI/CD Demo</h1>
-        <p>Continuous Integration & Continuous Delivery Pipeline</p>
-        <div class="status success">✅ Deployed Successfully</div>
-        <div class="status info">🔄 Pipeline Active</div>
+        <h1>🚀 Dynamic Personal Dashboard</h1>
+        <p>Live data updates • Real GitHub API • CI/CD Pipeline</p>
     </div>
 
-    <div class="card">
-        <h2>📊 Pipeline Overview</h2>
-        <div class="pipeline-flow">
-            <div class="pipeline-step">
-                <h4>📝 Code Push</h4>
-                <p>Git Repository</p>
+    <div class="dashboard">
+        <!-- Live Clock -->
+        <div class="card">
+            <h2>🕒 Live Clock</h2>
+            <div class="clock" id="live-clock">Loading...</div>
+            <div id="timezone"></div>
+        </div>
+
+        <!-- Daily Quote -->
+        <div class="card">
+            <h2>💭 Quote of the Day</h2>
+            <div class="quote" id="daily-quote">Loading inspirational quote...</div>
+        </div>
+
+        <!-- Visitor Counter -->
+        <div class="card">
+            <h2>👥 Visitor Stats</h2>
+            <div class="big-number" id="visitor-count">0</div>
+            <p>Total visits to this dashboard</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <strong id="session-time">0</strong><br>
+                    <small>Session Time (min)</small>
+                </div>
+                <div class="stat-item">
+                    <strong id="page-loads">1</strong><br>
+                    <small>Page Loads</small>
+                </div>
             </div>
-            <div class="arrow">→</div>
-            <div class="pipeline-step">
-                <h4>🔨 Build & Test</h4>
-                <p>GitHub Actions</p>
+        </div>
+
+        <!-- GitHub User Stats -->
+        <div class="card">
+            <h2>👤 GitHub Profile</h2>
+            <p id="user-name">Gonzalo Zelinka</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <strong id="user-repos">📁 --</strong><br>
+                    <small>Public Repos</small>
+                </div>
+                <div class="stat-item">
+                    <strong id="user-followers">👥 --</strong><br>
+                    <small>Followers</small>
+                </div>
             </div>
-            <div class="arrow">→</div>
-            <div class="pipeline-step">
-                <h4>🚢 Deploy</h4>
-                <p>GitHub Pages</p>
-            </div>
-            <div class="arrow">→</div>
-            <div class="pipeline-step">
-                <h4>📧 Notify</h4>
-                <p>Slack/Email</p>
+        </div>
+
+        <!-- System Status -->
+        <div class="card">
+            <h2>⚡ System Status</h2>
+            <p>Pipeline Status: <span class="status-online" id="pipeline-status">🟢 Online</span></p>
+            <p>Version: <strong id="app-version">2.0.0</strong></p>
+            <p>Uptime: <span id="uptime">Calculating...</span></p>
+            <p>Last Deploy: <span id="deploy-time">Loading...</span></p>
+        </div>
+
+        <!-- Random Fact -->
+        <div class="card">
+            <h2>🎲 Random Tech Fact</h2>
+            <div id="tech-fact">Loading fascinating tech fact...</div>
+            <button onclick="loadNewFact()" class="btn">New Fact</button>
+        </div>
+
+        <!-- Real GitHub Repository Stats -->
+        <div class="card">
+            <h2>📊 GitHub Repository</h2>
+            <p id="github-status" class="status-loading">🔄 Loading...</p>
+            <div id="github-stats" class="loading">
+                <p>Repository: <a href="#" id="repo-link" class="repo-link" target="_blank">Loading...</a></p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <strong id="repo-stars">⭐ --</strong><br>
+                        <small>Stars</small>
+                    </div>
+                    <div class="stat-item">
+                        <strong id="repo-forks">🍴 --</strong><br>
+                        <small>Forks</small>
+                    </div>
+                    <div class="stat-item">
+                        <strong id="repo-watchers">👀 --</strong><br>
+                        <small>Watchers</small>
+                    </div>
+                    <div class="stat-item">
+                        <strong id="repo-issues">🐛 --</strong><br>
+                        <small>Issues</small>
+                    </div>
+                </div>
+                <p id="last-commit">Last updated: Loading...</p>
             </div>
         </div>
     </div>
 
-    <div class="card">
-        <h2>💻 Application Output</h2>
-        <p>The TypeScript application generates the following output:</p>
-        <pre id="app-output">Loading application output...</pre>
-    </div>
-
-    <div class="card demo-section">
-        <h2>🎯 Demo Features</h2>
-        <ul>
-            <li><strong>Version Control:</strong> Git with GitHub repository</li>
-            <li><strong>Language:</strong> TypeScript with automated compilation</li>
-            <li><strong>Testing:</strong> Jest framework with automated test execution</li>
-            <li><strong>CI/CD:</strong> GitHub Actions pipeline</li>
-            <li><strong>Deployment:</strong> Automated deployment to GitHub Pages</li>
-            <li><strong>Notifications:</strong> Slack and Email integration</li>
-            <li><strong>Personal Account:</strong> Individual developer setup</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h2>🔧 Quick Commands</h2>
-        <pre>
-# Local Development
-npm install          # Install dependencies
-npm run dev         # Run in development mode
-npm test           # Run automated tests
-npm run build      # Build for production
-
-# CI/CD Pipeline
-git push origin main    # Trigger full pipeline (test + deploy)
-# Pull requests to main trigger tests only
-        </pre>
-    </div>
-
-    <div class="footer">
-        <p><strong>Personal CI/CD Demo</strong> | Built with TypeScript & GitHub Actions</p>
-        <p>🌟 Successfully demonstrating automated build, test, and deployment workflow</p>
-        <p id="build-time"></p>
-    </div>
-
-    <script>
-        // Simulate the TypeScript application output
-        document.addEventListener('DOMContentLoaded', function() {
-            const output = `Hello World from TypeScript CI/CD Demo!
-Version: 1.0.0
-🚀 CI/CD Pipeline Demo - Running successfully!
-
-Build Information:
-- Environment: Production
-- Deployment: GitHub Pages
-- Build Date: ${new Date().toLocaleString()}
-- Status: ✅ Successfully Deployed`;
-            
-            document.getElementById('app-output').textContent = output;
-            document.getElementById('build-time').textContent = `Last deployed: ${new Date().toLocaleString()}`;
-        });
-    </script>
+    <script src="dashboard.js"></script>
 </body>
 </html> 
