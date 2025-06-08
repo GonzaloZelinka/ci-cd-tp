@@ -91,6 +91,7 @@ jobs:
     name: Send Notifications
     needs: [test, deploy]
     runs-on: ubuntu-latest
+    # With this, the notification will be sent even if the build or deployment fails
     if: always()
 
     steps:
