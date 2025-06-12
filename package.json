@@ -8,8 +8,6 @@
     "start": "node dist/index.js",
     "test": "jest",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "prebuild": "rm -rf dist",
-    "postbuild": "mkdir -p dist && cp -r public/* dist/",
     "deploy": "echo 'Deploying to production...' && npm run build && echo 'Deployment complete!'",
     "setup": "chmod +x scripts/setup.sh && ./scripts/setup.sh"
   },
